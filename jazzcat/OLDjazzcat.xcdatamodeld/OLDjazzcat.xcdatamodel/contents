@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Access" representedClassName="Access" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="access" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Artist" representedClassName="Artist" syncable="YES" codeGenerationType="class">
+        <attribute name="birthYear" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deathYear" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="otherRoles" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="compositions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Composer" inverseName="artist" inverseEntity="Composer" syncable="YES"/>
+        <relationship name="credits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Credit" inverseName="artist" inverseEntity="Credit" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="leader" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="Composer" representedClassName="Composer" syncable="YES" codeGenerationType="class">
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="compositions" inverseEntity="Artist" syncable="YES"/>
+        <relationship name="composition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Composition" inverseName="composers" inverseEntity="Composition" syncable="YES"/>
+    </entity>
+    <entity name="Composition" representedClassName="Composition" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yearPublished" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="yearWritten" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="composers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Composer" inverseName="composition" inverseEntity="Composer" syncable="YES"/>
+        <relationship name="recordings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="composition" inverseEntity="Track" syncable="YES"/>
+        <relationship name="style" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Style" inverseName="compositions" inverseEntity="Style" syncable="YES"/>
+    </entity>
+    <entity name="Credit" representedClassName="Credit" syncable="YES" codeGenerationType="class">
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="credits" inverseEntity="Artist" syncable="YES"/>
+        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="personell" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="styles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Style" inverseName="genre" inverseEntity="Style" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="group" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Label" representedClassName="Label" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="label" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="Mood" representedClassName="Mood" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="mood" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+        <attribute name="catalog" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="otherCatalog" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="penguinRating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordingDate" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="label" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Label" inverseName="records" inverseEntity="Label" syncable="YES"/>
+        <relationship name="leader" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="records" inverseEntity="Artist" syncable="YES"/>
+        <relationship name="personell" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Credit" inverseName="record" inverseEntity="Credit" syncable="YES"/>
+        <relationship name="style" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Style" inverseName="records" inverseEntity="Style" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="record" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Style" representedClassName="Style" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="compositions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Composition" inverseName="style" inverseEntity="Composition" syncable="YES"/>
+        <relationship name="genre" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Genre" inverseName="styles" inverseEntity="Genre" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="style" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <entity name="Tempo" representedClassName="Tempo" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="tempo" inverseEntity="Track" syncable="YES"/>
+    </entity>
+    <entity name="Track" representedClassName="Track" syncable="YES" codeGenerationType="class">
+        <attribute name="disk" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="playCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="take" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="track" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="access" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Access" inverseName="tracks" inverseEntity="Access" syncable="YES"/>
+        <relationship name="composition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Composition" inverseName="recordings" inverseEntity="Composition" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="tracks" inverseEntity="Group" syncable="YES"/>
+        <relationship name="mood" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Mood" inverseName="tracks" inverseEntity="Mood" syncable="YES"/>
+        <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Record" inverseName="tracks" inverseEntity="Record" syncable="YES"/>
+        <relationship name="tempo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tempo" inverseName="tracks" inverseEntity="Tempo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Access" positionX="-1181" positionY="-90" width="128" height="90"/>
+        <element name="Artist" positionX="-281" positionY="-231" width="128" height="195"/>
+        <element name="Composer" positionX="223" positionY="-216" width="128" height="105"/>
+        <element name="Composition" positionX="-92" positionY="-18" width="128" height="150"/>
+        <element name="Credit" positionX="-479" positionY="-348" width="128" height="105"/>
+        <element name="Genre" positionX="-648" positionY="477" width="128" height="90"/>
+        <element name="Group" positionX="-1206" positionY="45" width="128" height="75"/>
+        <element name="Label" positionX="-902" positionY="-210" width="128" height="120"/>
+        <element name="Mood" positionX="-1233" positionY="162" width="128" height="90"/>
+        <element name="Record" positionX="-648" positionY="-90" width="128" height="210"/>
+        <element name="Style" positionX="-657" positionY="285" width="128" height="120"/>
+        <element name="Tempo" positionX="-1181" positionY="315" width="128" height="90"/>
+        <element name="Track" positionX="-893" positionY="36" width="128" height="270"/>
+    </elements>
+</model>
